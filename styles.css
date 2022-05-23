@@ -18,15 +18,45 @@ p {
   top: 400px;
   right: 30%;
   left: 30%;
+  font-size: x-large;
 }
 
 /* class selectors */
 
 .time {
-  display: inline;
-  padding: 150px;
+  display: block;
+  padding: 0 0 10px 45%;
+  padding-bottom: 500px;
 }
-
 .question {
   display: inline;
+  text-align: center;
+  margin: 0 0 0 35px;
+}
+
+.qbtn {
+  display: block;
+  padding: 30px;
+  margin: 30px;
+}
+
+.division {
+  margin: 300px;
+}
+
+.primary-div {
+  margin: 600px;
+}
+
+.high-scores {
+  text-align: center;
+  margin: 0 0 00px;
+}
+
+.answer {
+  text-align: center;
+}
+
+.your-score {
+  margin: 35px 0 0 0;
 }
