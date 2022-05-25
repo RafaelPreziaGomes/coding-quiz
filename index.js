@@ -20,318 +20,245 @@ let click = 0;
 var value = 0;
 // add an event listener to that button
 
-function quizCycle() {
-  startButton.addEventListener("click", () => {
-    click++;
-    console.log(click);
-    startButton.innerHTML = "Stop Quiz";
-    if (click > 0) {
-      document.querySelector("h1").remove();
-      // change the text content of that element
-      // add the time section
-      //  add text to the paragraph time
-      // select paragraph time
-      var time = document.querySelector(".time");
-      // add text to the paragraph
-      time.innerHTML = "time: 60";
-      // change the paragraph to a question
-      var question = document.querySelector(".question");
-      // select the paragraph of the question
-      question.textContent = "Commonly used data types do not include";
-      //change the text of the paragraph to the first question
-      // add the first button to the division
-      var firstBtn = document.createElement("buttom");
-      firstBtn.setAttribute("class", "btn btn-primary qbtn");
-      firstBtn.innerHTML = "booleans";
-      document.getElementById("myDiv").appendChild(firstBtn);
-      // add event listener to the buttons
-      firstBtn.addEventListener("click", () => {
-        time.innerHTML = "time: 15        ";
-        // remove all buttons
+startButton.addEventListener("click", initialQuestion);
 
-        firstBtn.remove();
-        secondBtn.remove();
-        thirdBtn.remove();
-        fourthBtn.remove();
-        // create and add buttons once again
-        var firstBtn1 = document.createElement("buttom");
-        firstBtn1.setAttribute("class", "btn btn-primary qbtn");
-        firstBtn1.innerHTML = "numbers and strings";
-        document.getElementById("myDiv").appendChild(firstBtn1);
-        var secondBtn1 = document.createElement("buttom");
-        secondBtn1.setAttribute("class", "btn btn-primary qbtn");
-        secondBtn1.innerHTML = "booleans";
-        document.getElementById("myDiv").appendChild(secondBtn1);
-        var thirdBtn1 = document.createElement("buttom");
-        thirdBtn1.setAttribute("class", "btn btn-primary qbtn");
-        thirdBtn1.innerHTML = "all of the above";
-        document.getElementById("myDiv").appendChild(thirdBtn1);
-        var fourthBtn1 = document.createElement("buttom");
-        fourthBtn1.setAttribute("class", "btn btn-primary qbtn");
-        fourthBtn1.innerHTML = "other arrays";
-        document.getElementById("myDiv").appendChild(fourthBtn1);
-        // change question content
-        question.textContent = "Arrays in Javascript can be used to store";
-        // create a new h3 stating wrong question
-        var answer = document.createElement("h5");
-        // set the text of the h3 as wrong question
-        answer.innerHTML = " wrong answer ";
-        var value = 0;
-        console.log(value);
-        // add an attribute of class to that button
-        answer.setAttribute("class", "answer");
-        // append to a div
-        document.getElementById("myDiv").appendChild(answer);
+var questionCounter = 0;
 
-        firstBtn1.addEventListener("click", () => {
-          if (value == 0) {
-            removeElementsByClass("qbtn");
-            removeElementsByClass("question");
-            removeElementsByClass("time");
-            var lostMessage = document.querySelector(".lost-won-message");
-            // select the paragraph of the question
-            lostMessage.textContent = "Sorry, you lost";
-            // show score
-            var yourScore = document.querySelector(".your-score");
-            yourScore.innerHTML = "Your score: 0";
-          }
-          removeElementsByClass("qbtn");
-          // create and add buttons once again
-          var firstBtn2 = document.createElement("buttom");
-          firstBtn1.setAttribute("class", "btn btn-primary qbtn");
-          firstBtn1.innerHTML = "";
-          document.getElementById("myDiv").appendChild(firstBtn1);
-          var secondBtn2 = document.createElement("buttom");
-          secondBtn1.setAttribute("class", "btn btn-primary qbtn");
-          secondBtn1.innerHTML = "";
-          document.getElementById("myDiv").appendChild(secondBtn1);
-          var thirdBtn2 = document.createElement("buttom");
-          thirdBtn1.setAttribute("class", "btn btn-primary qbtn");
-          thirdBtn1.innerHTML = "";
-          document.getElementById("myDiv").appendChild(thirdBtn1);
-          var fourthBtn2 = document.createElement("buttom");
-          fourthBtn1.setAttribute("class", "btn btn-primary qbtn");
-          fourthBtn1.innerHTML = "";
-          document.getElementById("myDiv").appendChild(fourthBtn1);
-          // change question content
-          question.textContent = "Arrays in Javascript can be used to store";
-          // create a new h3 stating wrong question
-          var answer = document.createElement("h5");
-          // set the text of the h3 as wrong question
-          answer.innerHTML = " wrong answer ";
+var questions = [
+  {
+    question: "Commonly used data types do not include",
+    choices: ["booleans", "strings", "numbers", "alerts"],
+    answer: "alerts",
+  },
+  {
+    question: "Arrays in Javascript can be used to store",
+    choices: [
+      "numbers and strings",
+      "booleans",
+      "other arrays",
+      "all of the above",
+    ],
+    answer: "all of the above",
+  },
+  {
+    question: "Some other question",
+    choices: ["a", "b", "c", "d"],
+    answer: "a",
+  },
+];
 
-          var question = document.querySelector(".question");
-          // select the paragraph of the question
-          question.textContent = "Sorry, you lost";
-          time.innerHTML = "time: 0";
-          answer.innerHTML = " wrong answer, sorry you lost";
-          question.textContent = "Sorry you lost";
+function initialQuestion() {
+  var question = document.querySelector(".question");
+  question.textContent = questions[questionCounter].question;
+  document.querySelector("h1").remove();
+  var firstBtn = document.createElement("buttom");
+  firstBtn.setAttribute("id", "btn1");
+  firstBtn.setAttribute("class", "btn btn-primary qbtn");
+  firstBtn.innerHTML = questions[questionCounter].choices[0];
+  document.getElementById("myDiv").appendChild(firstBtn);
+  var secondBtn = document.createElement("buttom");
+  secondBtn.setAttribute("id", "btn2");
+  secondBtn.setAttribute("class", "btn btn-primary qbtn");
+  secondBtn.innerHTML = questions[questionCounter].choices[1];
+  document.getElementById("myDiv").appendChild(secondBtn);
+  var thirdBtn = document.createElement("buttom");
+  thirdBtn.setAttribute("id", "btn3");
+  thirdBtn.setAttribute("class", "btn btn-primary qbtn");
+  thirdBtn.innerHTML = questions[questionCounter].choices[2];
+  document.getElementById("myDiv").appendChild(thirdBtn);
+  var fourthBtn = document.createElement("buttom");
+  fourthBtn.setAttribute("id", "btn4");
+  fourthBtn.setAttribute("class", "btn btn-primary qbtn");
+  fourthBtn.innerHTML = questions[questionCounter].choices[3];
+  document.getElementById("myDiv").appendChild(fourthBtn);
 
-          // remove all buttons
-
-          // create and add buttons once again
-
-          firstBtn.remove();
-          secondBtn.remove();
-          thirdBtn.remove();
-          fourthBtn.remove();
-          var firstBtn1 = document.createElement("buttom");
-          firstBtn1.setAttribute("class", "btn btn-primary qbtn");
-          firstBtn1.innerHTML = "numbers and strings";
-          document.getElementById("myDiv").appendChild(firstBtn1);
-          var secondBtn1 = document.createElement("buttom");
-          secondBtn1.setAttribute("class", "btn btn-primary qbtn");
-          secondBtn1.innerHTML = "booleans";
-          document.getElementById("myDiv").appendChild(secondBtn1);
-          var thirdBtn1 = document.createElement("buttom");
-          thirdBtn1.setAttribute("class", "btn btn-primary qbtn");
-          thirdBtn1.innerHTML = "all of the above";
-          document.getElementById("myDiv").appendChild(thirdBtn1);
-          var fourthBtn1 = document.createElement("buttom");
-          fourthBtn1.setAttribute("class", "btn btn-primary qbtn");
-          fourthBtn1.innerHTML = "other arrays";
-          document.getElementById("myDiv").appendChild(fourthBtn1);
-          // change question content
-          question.textContent = "Arrays in Javascript can be used to store";
-          // create a new h3 stating wrong question
-          var answer = document.createElement("h5");
-          // set the text of the h3 as wrong question
-          answer.innerHTML = " wrong answer ";
-          // add an attribute of class to that button
-          answer.setAttribute("class", "answer");
-          // append to a div
-          document.getElementById("myDiv").appendChild(answer);
-        });
-      });
-      // add the second button to the division
-      var secondBtn = document.createElement("buttom");
-      secondBtn.setAttribute("class", "btn btn-primary qbtn");
-      secondBtn.innerHTML = "strings";
-      document.getElementById("myDiv").appendChild(secondBtn);
-      // add event listener to the buttons
-      secondBtn.addEventListener("click", () => {
-        time.innerHTML = "time: 15        ";
-        // remove all buttons
-
-        firstBtn.remove();
-        secondBtn.remove();
-        thirdBtn.remove();
-        fourthBtn.remove();
-        // create and add buttons once again
-        var firstBtn1 = document.createElement("buttom");
-        firstBtn1.setAttribute("class", "btn btn-primary qbtn");
-        firstBtn1.innerHTML = "numbers and strings";
-        document.getElementById("myDiv").appendChild(firstBtn1);
-        var secondBtn1 = document.createElement("buttom");
-        secondBtn1.setAttribute("class", "btn btn-primary qbtn");
-        secondBtn1.innerHTML = "booleans";
-        document.getElementById("myDiv").appendChild(secondBtn1);
-        var thirdBtn1 = document.createElement("buttom");
-        thirdBtn1.setAttribute("class", "btn btn-primary qbtn");
-        thirdBtn1.innerHTML = "all of the above";
-        document.getElementById("myDiv").appendChild(thirdBtn1);
-        var fourthBtn1 = document.createElement("buttom");
-        fourthBtn1.setAttribute("class", "btn btn-primary qbtn");
-        fourthBtn1.innerHTML = "other arrays";
-        document.getElementById("myDiv").appendChild(fourthBtn1);
-        // change question content
-        question.textContent = "Arrays in Javascript can be used to store";
-        // create a new h3 stating wrong question
-        var answer = document.createElement("h5");
-        // set the text of the h3 as wrong question
-        answer.innerHTML = " wrong answer ";
-        // add an attribute of class to that button
-        answer.setAttribute("class", "answer");
-        // append to a div
-        document.getElementById("myDiv").appendChild(answer);
-      });
-      // add the second button to the division
-      // add the third button to the division
-      var thirdBtn = document.createElement("buttom");
-      thirdBtn.setAttribute("class", "btn btn-primary qbtn");
-      thirdBtn.innerHTML = "numbers";
-      document.getElementById("myDiv").appendChild(thirdBtn);
-      // add event listener to the buttons
-      thirdBtn.addEventListener("click", () => {
-        time.innerHTML = "time: 15        ";
-        // remove all buttons
-
-        firstBtn.remove();
-        secondBtn.remove();
-        thirdBtn.remove();
-        fourthBtn.remove();
-        // create and add buttons once again
-        var firstBtn1 = document.createElement("buttom");
-        firstBtn1.setAttribute("class", "btn btn-primary qbtn");
-        firstBtn1.innerHTML = "numbers and strings";
-        document.getElementById("myDiv").appendChild(firstBtn1);
-        var secondBtn1 = document.createElement("buttom");
-        secondBtn1.setAttribute("class", "btn btn-primary qbtn");
-        secondBtn1.innerHTML = "booleans";
-        document.getElementById("myDiv").appendChild(secondBtn1);
-        var thirdBtn1 = document.createElement("buttom");
-        thirdBtn1.setAttribute("class", "btn btn-primary qbtn");
-        thirdBtn1.innerHTML = "all of the above";
-        document.getElementById("myDiv").appendChild(thirdBtn1);
-        var fourthBtn1 = document.createElement("buttom");
-        fourthBtn1.setAttribute("class", "btn btn-primary qbtn");
-        fourthBtn1.innerHTML = "other arrays";
-        document.getElementById("myDiv").appendChild(fourthBtn1);
-        // change question content
-        question.textContent = "Arrays in Javascript can be used to store";
-        // create a new h3 stating wrong question
-        var answer = document.createElement("h5");
-        // set the text of the h3 as wrong question
-        answer.innerHTML = " wrong answer ";
-        // add an attribute of class to that button
-        answer.setAttribute("class", "answer");
-        // append to a div
-        document.getElementById("myDiv").appendChild(answer);
-      });
-      // add the fourth button to the division / add a right answerto this button/
-      var fourthBtn = document.createElement("buttom");
-      fourthBtn.setAttribute("class", "btn btn-primary qbtn");
-      fourthBtn.innerHTML = "alerts";
-      fourthBtn.addEventListener("click", () => {
-        firstBtn.remove();
-        secondBtn.remove();
-        thirdBtn.remove();
-        fourthBtn.remove();
-        // create and add buttons once again
-        var firstBtn1 = document.createElement("buttom");
-        firstBtn1.setAttribute("class", "btn btn-primary qbtn");
-        firstBtn1.innerHTML = "numbers and strings";
-        document.getElementById("myDiv").appendChild(firstBtn1);
-        var secondBtn1 = document.createElement("buttom");
-        secondBtn1.setAttribute("class", "btn btn-primary qbtn");
-        secondBtn1.innerHTML = "booleans";
-        document.getElementById("myDiv").appendChild(secondBtn1);
-        var thirdBtn1 = document.createElement("buttom");
-        thirdBtn1.setAttribute("class", "btn btn-primary qbtn");
-        thirdBtn1.innerHTML = "all of the above";
-        document.getElementById("myDiv").appendChild(thirdBtn1);
-        var fourthBtn1 = document.createElement("buttom");
-        fourthBtn1.setAttribute("class", "btn btn-primary qbtn");
-        fourthBtn1.innerHTML = "other arrays";
-        document.getElementById("myDiv").appendChild(fourthBtn1);
-        // change question content
-        question.textContent = "Arrays in Javascript can be used to store";
-        // create a new h3 stating wrong question
-        var answer = document.createElement("h5");
-        // set the text of the h3 as wrong question
-        answer.innerHTML = " right answer ";
-        value = 1;
-        // add an attribute of class to that button
-        answer.setAttribute("class", "answer");
-        // append to a div
-        document.getElementById("myDiv").appendChild(answer);
-      });
-      document.getElementById("myDiv").appendChild(fourthBtn);
-      // add event listener to the buttons
-      thirdBtn.addEventListener("click", () => {
-        time.innerHTML = "time: 15        ";
-        // remove all buttons
-
-        firstBtn.remove();
-        secondBtn.remove();
-        thirdBtn.remove();
-        fourthBtn.remove();
-        // create and add buttons once again
-        var firstBtn1 = document.createElement("buttom");
-        firstBtn1.setAttribute("class", "btn btn-primary qbtn");
-        firstBtn1.innerHTML = "numbers and strings";
-        document.getElementById("myDiv").appendChild(firstBtn1);
-        var secondBtn1 = document.createElement("buttom");
-        secondBtn1.setAttribute("class", "btn btn-primary qbtn");
-        secondBtn1.innerHTML = "booleans";
-        document.getElementById("myDiv").appendChild(secondBtn1);
-        var thirdBtn1 = document.createElement("buttom");
-        thirdBtn1.setAttribute("class", "btn btn-primary qbtn");
-        thirdBtn1.innerHTML = "all of the above";
-        document.getElementById("myDiv").appendChild(thirdBtn1);
-        var fourthBtn1 = document.createElement("buttom");
-        fourthBtn1.setAttribute("class", "btn btn-primary qbtn");
-        fourthBtn1.innerHTML = "other arrays";
-        document.getElementById("myDiv").appendChild(fourthBtn1);
-        // change question content
-        question.textContent = "Arrays in Javascript can be used to store";
-        // create a new h3 stating wrong question
-        var answer = document.createElement("h5");
-        // set the text of the h3 as wrong question
-        answer.innerHTML = " wrong answer ";
-        // add an attribute of class to that button
-        answer.setAttribute("class", "answer");
-        // append to a div
-        document.getElementById("myDiv").appendChild(answer);
-      });
-    }
-    startButton.addEventListener("click", () => {
-      click++;
-      console.log(click);
-      startButton.innerHTML = "Restart Quiz";
-      quizCycle();
-    });
+  firstBtn.addEventListener("click", nextQuestion);
+  secondBtn.addEventListener("click", nextQuestion);
+  thirdBtn.addEventListener("click", nextQuestion);
+  fourthBtn.addEventListener("click", function () {
+    value++;
+    nextQuestion();
   });
 }
 
-quizCycle();
+function nextQuestion() {
+  questionCounter++;
+  console.log(questionCounter);
+
+  var question = document.querySelector(".question");
+  question.textContent = "What is an object in javascript";
+
+  console.log("getting clicked");
+  var firstBtn = document.getElementById("btn1");
+  var secondBtn = document.getElementById("btn2");
+  var thirdBtn = document.getElementById("btn3");
+  var fourthBtn = document.getElementById("btn4");
+
+  removeElementsByClass("qbtn");
+
+  var firstBtn1 = document.createElement("buttom");
+  firstBtn1.setAttribute("id", "btn1");
+  firstBtn1.setAttribute("class", "btn btn-primary qbtn");
+  firstBtn1.innerHTML = questions[questionCounter].choices;
+  document.getElementById("myDiv").appendChild(firstBtn1);
+  var secondBtn1 = document.createElement("buttom");
+  secondBtn1.setAttribute("id", "btn2");
+  secondBtn1.setAttribute("class", "btn btn-primary qbtn");
+  secondBtn1.innerHTML = questions[questionCounter].choices[1];
+  document.getElementById("myDiv").appendChild(secondBtn1);
+  var thirdBtn1 = document.createElement("buttom");
+  thirdBtn1.setAttribute("id", "btn3");
+  thirdBtn1.setAttribute("class", "btn btn-primary qbtn");
+  thirdBtn1.innerHTML = questions[questionCounter].choices[2];
+  document.getElementById("myDiv").appendChild(thirdBtn1);
+  var fourthBtn1 = document.createElement("buttom");
+  fourthBtn1.setAttribute("id", "btn4");
+  fourthBtn1.setAttribute("class", "btn btn-primary qbtn");
+  fourthBtn1.innerHTML = questions[questionCounter].choices[3];
+  document.getElementById("myDiv").appendChild(fourthBtn1);
+
+  firstBtn1.addEventListener("click", function () {
+    if (value > 0) {
+      nextQuestion();
+    } else {
+      removeElementsByClass("qbtn");
+      question.textContent = "You failed";
+    }
+  });
+  secondBtn1.addEventListener("click", function () {
+    if (value > 0) {
+      nextQuestion();
+    } else {
+      removeElementsByClass("qbtn");
+      question.textContent = "You failed";
+    }
+  });
+  thirdBtn1.addEventListener("click", function () {
+    if (value > 0) {
+      nextQuestion();
+    } else {
+      removeElementsByClass("qbtn");
+      question.textContent = "You failed";
+    }
+  });
+  fourthBtn1.addEventListener("click", function () {
+    value++;
+    if (value > 0) {
+      nextQuestion();
+    } else {
+      removeElementsByClass("qbtn");
+      question.textContent = "You failed";
+    }
+  });
+}
+
+function nextQuestion2() {
+  questionCounter++;
+
+  var question = document.querySelector(".question");
+  question.textContent = questions[questionCounter].question;
+
+  var firstBtn3 = document.getElementById("btn111");
+  var secondBtn3 = document.getElementById("btn222");
+  var thirdBtn3 = document.getElementById("btn333");
+  var fourthBtn3 = document.getElementById("btn444");
+
+  removeElementsByClass("qbtn");
+
+  var firstBtn3 = document.createElement("buttom");
+  firstBtn3.setAttribute("id", "btn111");
+  firstBtn3.setAttribute("class", "btn btn-primary qbtn");
+  firstBtn3.innerHTML = questions[questionCounter].choices[0];
+  document.getElementById("myDiv").appendChild(firstBtn3);
+  var secondBtn3 = document.createElement("buttom");
+  secondBtn3.setAttribute("id", "btn222");
+  secondBtn3.setAttribute("class", "btn btn-primary qbtn");
+  secondBtn3.innerHTML = questions[questionCounter].choices[1];
+  document.getElementById("myDiv").appendChild(secondBtn3);
+  var thirdBtn3 = document.createElement("buttom");
+  thirdBtn3.setAttribute("id", "btn333");
+  thirdBtn3.setAttribute("class", "btn btn-primary qbtn");
+  thirdBtn3.innerHTML = questions[questionCounter].choices[2];
+  document.getElementById("myDiv").appendChild(thirdBtn3);
+  var fourthBtn3 = document.createElement("buttom");
+  fourthBtn3.setAttribute("id", "btn444");
+  fourthBtn3.setAttribute("class", "btn btn-primary qbtn");
+  fourthBtn3.innerHTML = questions[questionCounter].choices[3];
+  document.getElementById("myDiv").appendChild(fourthBtn3);
+  firstBtn3.addEventListener("click", function () {
+    value++;
+    if (value == 1) {
+      removeElementsByClass("qbtn");
+      removeElementsByClass("title");
+      question.textContent = "You Kinda Passed";
+    } else if (value == 2) {
+      removeElementsByClass("qbtn");
+      removeElementsByClass("title");
+      question.textContent = "You Passed";
+    } else if (value == 3) {
+      removeElementsByClass("qbtn");
+      removeElementsByClass("title");
+      question.textContent = "You did great";
+    } else {
+      removeElementsByClass("qbtn");
+      removeElementsByClass("title");
+      question.textContent = "You failed";
+    }
+  });
+  secondBtn3.addEventListener("click", function () {
+    if (value == 1) {
+      removeElementsByClass("qbtn");
+      removeElementsByClass("title");
+      question.textContent = "You Kinda Passed";
+    } else if (value == 2) {
+      removeElementsByClass("qbtn");
+      question.textContent = "You Passed";
+    } else if (value == 3) {
+      removeElementsByClass("qbtn");
+      removeElementsByClass("title");
+      question.textContent = "You did great";
+    } else {
+      removeElementsByClass("qbtn");
+      removeElementsByClass("title");
+      question.textContent = "You failed";
+    }
+  });
+  thirdBtn3.addEventListener("click", function () {
+    if (value == 1) {
+      removeElementsByClass("qbtn");
+      removeElementsByClass("title");
+      question.textContent = "You Kinda Passed";
+    } else if (value == 2) {
+      removeElementsByClass("qbtn");
+      removeElementsByClass("title");
+      question.textContent = "You Passed";
+    } else if (value == 3) {
+      removeElementsByClass("qbtn");
+      removeElementsByClass("title");
+      question.textContent = "You did great";
+    } else {
+      removeElementsByClass("qbtn");
+      removeElementsByClass("title");
+      question.textContent = "You failed";
+    }
+  });
+  fourthBtn3.addEventListener("click", function () {
+    if (value == 1) {
+      removeElementsByClass("qbtn");
+      removeElementsByClass("title");
+      question.textContent = "You Kinda Passed";
+    } else if (value == 2) {
+      removeElementsByClass("qbtn");
+      removeElementsByClass("title");
+      question.textContent = "You Passed";
+    } else if (value == 3) {
+      removeElementsByClass("qbtn");
+      removeElementsByClass("title");
+      question.textContent = "You did great";
+    } else {
+      removeElementsByClass("qbtn");
+      removeElementsByClass("title");
+      question.textContent = "You failed";
+    }
+  });
+}
