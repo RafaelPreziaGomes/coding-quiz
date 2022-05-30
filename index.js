@@ -80,7 +80,12 @@ function initialQuestion() {
     value++;
     nextQuestion();
   });
-}
+
+document.querySelector("a").addEventListener( function() {
+    removeElementsByClass("qbtn")
+    var question = document.querySelector(".question");
+    question.textContent = "Score";
+});
 
 function nextQuestion() {
   questionCounter++;
