@@ -119,7 +119,7 @@ function nextQuestion() {
 
   firstBtn1.addEventListener("click", function () {
     if (value > 0) {
-      nextQuestion();
+      nextQuestion2();
     } else {
       removeElementsByClass("qbtn");
       question.textContent = "You failed";
@@ -127,7 +127,7 @@ function nextQuestion() {
   });
   secondBtn1.addEventListener("click", function () {
     if (value > 0) {
-      nextQuestion();
+      nextQuestion2();
     } else {
       removeElementsByClass("qbtn");
       question.textContent = "You failed";
@@ -135,7 +135,7 @@ function nextQuestion() {
   });
   thirdBtn1.addEventListener("click", function () {
     if (value > 0) {
-      nextQuestion();
+      nextQuestion2();
     } else {
       removeElementsByClass("qbtn");
       question.textContent = "You failed";
@@ -144,7 +144,7 @@ function nextQuestion() {
   fourthBtn1.addEventListener("click", function () {
     value++;
     if (value > 0) {
-      nextQuestion();
+      nextQuestion2();
     } else {
       removeElementsByClass("qbtn");
       question.textContent = "You failed";
