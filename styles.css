@@ -8,14 +8,15 @@ a {
 h1 {
   position: absolute;
   text-align: center;
-  top: 300px;
+  top: 200px;
   right: 30%;
   left: 30%;
 }
 
 p {
   position: absolute;
-  top: 400px;
+  text-align: center;
+  top: 300px;
   right: 30%;
   left: 30%;
   font-size: x-large;
@@ -26,7 +27,7 @@ p {
 .time {
   display: block;
   padding: 0 0 10px 45%;
-  padding-bottom: 500px;
+  padding-bottom: 900px;
 }
 .question {
   display: inline;

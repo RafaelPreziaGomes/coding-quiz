@@ -6,6 +6,39 @@ function removeElementsByClass(className) {
     elements[0].parentNode.removeChild(elements[0]);
   }
 }
+
+function lastPage() {
+  // creating an input element
+  var division1 = document.createElement("div");
+  var input = document.createElement("input");
+  division1.setAttribute("class", "input-group mb-3");
+  input.setAttribute("class", "form-control");
+  var division2 = document.createElement("div");
+  division2.setAttribute("class", "input-group-append");
+  var buttonInput = document.createElement("button");
+  buttonInput.setAttribute("class", "btn btn-outline-secondary");
+  document.getElementsByClassName("mb-3").appendChild(input);
+  document.getElementsByClassName("mb-3").appendChild(division2);
+  document
+    .getElementsByClassName("input-group-append")
+    .appendChild(buttonInput);
+
+  document.getElementById("myDiv").appendChild(division1);
+  //this will change depending on the correct answers
+  var scoreArray = JSON.parse(localStorage.getItem("highscores")) || []; //here you need an array to push all new scores, if the local storage doesn't exist, then just default to an empty array
+
+  var saveScore = document.getElementById("saveScore"); //targets a button with saveScore id
+
+  saveScore.addEventListener("click", function () {
+    var initials = document.getElementsByTagName("input"); //you will create an input element and give it this id of inputEl
+    var data = {
+      initials: initials.value,
+      score: value,
+    };
+    scoreArray.push(data);
+    localStorage.setItem("highscores", JSON.stringify(scoreArray));
+  });
+}
 // change the start quiz text to stop quiz
 
 // take the object and set it to a variable
@@ -41,8 +74,13 @@ var questions = [
     answer: "all of the above",
   },
   {
-    question: "Some other question",
-    choices: ["a", "b", "c", "d"],
+    question: "What is the correct combo definition?",
+    choices: [
+      "an object is a standalone entity, with properties and type is an object.",
+      "an array is an value.",
+      "a string is an boolean.",
+      "a boolean is an",
+    ],
     answer: "a",
   },
 ];
@@ -51,7 +89,7 @@ function initialQuestion() {
   document.querySelector(".startBtn").remove();
   var question = document.querySelector(".question");
   question.textContent = questions[questionCounter].question;
-  document.querySelector("h1").remove();
+
   var firstBtn = document.createElement("buttom");
   firstBtn.setAttribute("id", "btn1");
   firstBtn.setAttribute("class", "btn btn-primary qbtn");
@@ -77,16 +115,16 @@ function initialQuestion() {
   secondBtn.addEventListener("click", nextQuestion);
   thirdBtn.addEventListener("click", nextQuestion);
   fourthBtn.addEventListener("click", function () {
-    value++;
+    value = value + 3.3;
     nextQuestion();
   });
 
-document.querySelector("a").addEventListener( function() {
-    removeElementsByClass("qbtn")
+  document.querySelector("a").addEventListener("click", function () {
+    removeElementsByClass("qbtn");
     var question = document.querySelector(".question");
-    question.textContent = "Score";
-});
-
+    question.textContent = "Score: " + String(Math.floor(value * 10));
+  });
+}
 function nextQuestion() {
   questionCounter++;
   console.log(questionCounter);
@@ -128,7 +166,8 @@ function nextQuestion() {
       nextQuestion2();
     } else {
       removeElementsByClass("qbtn");
-      question.textContent = "You failed";
+      question.textContent =
+        "You failed, score: " + String(Math.floor(value * 10));
     }
   });
   secondBtn1.addEventListener("click", function () {
@@ -136,7 +175,8 @@ function nextQuestion() {
       nextQuestion2();
     } else {
       removeElementsByClass("qbtn");
-      question.textContent = "You failed";
+      question.textContent =
+        "You failed, score: " + String(Math.floor(value * 10));
     }
   });
   thirdBtn1.addEventListener("click", function () {
@@ -144,16 +184,18 @@ function nextQuestion() {
       nextQuestion2();
     } else {
       removeElementsByClass("qbtn");
-      question.textContent = "You failed";
+      question.textContent =
+        "You failed, score: " + String(Math.floor(value * 10));
     }
   });
   fourthBtn1.addEventListener("click", function () {
-    value++;
+    value = value + 3.3;
     if (value > 0) {
       nextQuestion2();
     } else {
       removeElementsByClass("qbtn");
-      question.textContent = "You failed";
+      question.textContent =
+        "You failed, score: " + String(Math.floor(value * 10));
     }
   });
 }
@@ -191,80 +233,113 @@ function nextQuestion2() {
   fourthBtn3.setAttribute("class", "btn btn-primary qbtn");
   fourthBtn3.innerHTML = questions[questionCounter].choices[3];
   document.getElementById("myDiv").appendChild(fourthBtn3);
+
   firstBtn3.addEventListener("click", function () {
-    value++;
-    if (value == 1) {
+    if (Math.floor(value) == 3.3) {
       removeElementsByClass("qbtn");
       removeElementsByClass("title");
-      question.textContent = "You Kinda Passed";
-    } else if (value == 2) {
+      question.textContent =
+        "You Kinda Passed, score: " + String(Math.floor(value * 10));
+      lastPage();
+    } else if (Math.floor(value) == 9.9) {
       removeElementsByClass("qbtn");
       removeElementsByClass("title");
-      question.textContent = "You Passed";
-    } else if (value == 3) {
+      question.textContent =
+        "You Passed, score: " + String(Math.floor(value * 10));
+      lastPage();
+    } else if (Math.floor(value) == 6.6) {
       removeElementsByClass("qbtn");
       removeElementsByClass("title");
-      question.textContent = "You did great";
+      question.textContent =
+        "You did great , score: " + String(Math.floor(value * 10));
+      lastPage();
     } else {
       removeElementsByClass("qbtn");
       removeElementsByClass("title");
-      question.textContent = "You failed";
+      question.textContent =
+        "You failed, score: " + String(Math.floor(value * 10));
+      lastPage();
     }
   });
   secondBtn3.addEventListener("click", function () {
-    if (value == 1) {
+    if (Math.floor(value) == 3.3) {
       removeElementsByClass("qbtn");
       removeElementsByClass("title");
-      question.textContent = "You Kinda Passed";
-    } else if (value == 2) {
-      removeElementsByClass("qbtn");
-      question.textContent = "You Passed";
-    } else if (value == 3) {
+      question.textContent =
+        "You Kinda Passed, score: " + String(Math.floor(value * 10));
+      lastPage();
+    } else if (Math.floor(value) == 9.9) {
       removeElementsByClass("qbtn");
       removeElementsByClass("title");
-      question.textContent = "You did great";
+      question.textContent =
+        "You Passed, score: " + String(Math.floor(value * 10));
+      lastPage();
+    } else if (Math.floor(value) == 6.6) {
+      removeElementsByClass("qbtn");
+      removeElementsByClass("title");
+      question.textContent =
+        "You did great , score: " + String(Math.floor(value * 10));
+      lastPage();
     } else {
       removeElementsByClass("qbtn");
       removeElementsByClass("title");
-      question.textContent = "You failed";
+      question.textContent =
+        "You failed, score: " + String(Math.floor(value * 10));
+      lastPage();
     }
   });
   thirdBtn3.addEventListener("click", function () {
-    if (value == 1) {
+    if (Math.floor(value) == 3.3) {
       removeElementsByClass("qbtn");
       removeElementsByClass("title");
-      question.textContent = "You Kinda Passed";
-    } else if (value == 2) {
+      question.textContent =
+        "You Kinda Passed, score: " + String(Math.floor(value * 10));
+      lastPage();
+    } else if (Math.floor(value) == 9.9) {
       removeElementsByClass("qbtn");
       removeElementsByClass("title");
-      question.textContent = "You Passed";
-    } else if (value == 3) {
+      question.textContent =
+        "You Passed, score: " + String(Math.floor(value * 10));
+      lastPage();
+    } else if (Math.floor(value) == 6.6) {
       removeElementsByClass("qbtn");
       removeElementsByClass("title");
-      question.textContent = "You did great";
+      question.textContent =
+        "You did great , score: " + String(Math.floor(value * 10));
+      lastPage();
     } else {
       removeElementsByClass("qbtn");
       removeElementsByClass("title");
-      question.textContent = "You failed";
+      question.textContent =
+        "You failed, score: " + String(Math.floor(value * 10));
+      lastPage();
     }
   });
   fourthBtn3.addEventListener("click", function () {
-    if (value == 1) {
+    if (Math.floor(value) == 3.3) {
       removeElementsByClass("qbtn");
       removeElementsByClass("title");
-      question.textContent = "You Kinda Passed";
-    } else if (value == 2) {
+      question.textContent =
+        "You Kinda Passed, score: " + String(Math.floor(value * 10));
+      lastPage();
+    } else if (Math.floor(value) == 9.9) {
       removeElementsByClass("qbtn");
       removeElementsByClass("title");
-      question.textContent = "You Passed";
-    } else if (value == 3) {
+      question.textContent =
+        "You Passed, score: " + String(Math.floor(value * 10));
+      lastPage();
+    } else if (Math.floor(value) == 6.6) {
       removeElementsByClass("qbtn");
       removeElementsByClass("title");
-      question.textContent = "You did great";
+      question.textContent =
+        "You did great , score: " + String(Math.floor(value * 10));
+      lastPage();
     } else {
       removeElementsByClass("qbtn");
       removeElementsByClass("title");
-      question.textContent = "You failed";
+      question.textContent =
+        "You failed, score: " + String(Math.floor(value * 10));
+      lastPage();
     }
   });
 }
