@@ -48,6 +48,7 @@ var questions = [
 ];
 
 function initialQuestion() {
+  document.querySelector(".startBtn").remove();
   var question = document.querySelector(".question");
   question.textContent = questions[questionCounter].question;
   document.querySelector("h1").remove();
