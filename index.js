@@ -7,38 +7,8 @@ function removeElementsByClass(className) {
   }
 }
 
-function lastPage() {
-  // creating an input element
-  var division1 = document.createElement("div");
-  var input = document.createElement("input");
-  division1.setAttribute("class", "input-group mb-3");
-  input.setAttribute("class", "form-control");
-  var division2 = document.createElement("div");
-  division2.setAttribute("class", "input-group-append");
-  var buttonInput = document.createElement("button");
-  buttonInput.setAttribute("class", "btn btn-outline-secondary");
-  document.getElementsByClassName("mb-3").appendChild(input);
-  document.getElementsByClassName("mb-3").appendChild(division2);
-  document
-    .getElementsByClassName("input-group-append")
-    .appendChild(buttonInput);
+var scoreArray = JSON.parse(localStorage.getItem("highscores")) || []; //here you need an array to push all new scores, if the local storage doesn't exist, then just default to an empty array
 
-  document.getElementById("myDiv").appendChild(division1);
-  //this will change depending on the correct answers
-  var scoreArray = JSON.parse(localStorage.getItem("highscores")) || []; //here you need an array to push all new scores, if the local storage doesn't exist, then just default to an empty array
-
-  var saveScore = document.getElementById("saveScore"); //targets a button with saveScore id
-
-  saveScore.addEventListener("click", function () {
-    var initials = document.getElementsByTagName("input"); //you will create an input element and give it this id of inputEl
-    var data = {
-      initials: initials.value,
-      score: value,
-    };
-    scoreArray.push(data);
-    localStorage.setItem("highscores", JSON.stringify(scoreArray));
-  });
-}
 // change the start quiz text to stop quiz
 
 // take the object and set it to a variable
@@ -65,21 +35,16 @@ var questions = [
   },
   {
     question: "Arrays in Javascript can be used to store",
-    choices: [
-      "numbers and strings",
-      "booleans",
-      "other arrays",
-      "all of the above",
-    ],
+    choices: ["numbers", "booleans", "other arrays", "all of the above"],
     answer: "all of the above",
   },
   {
     question: "What is the correct combo definition?",
     choices: [
-      "an object is a standalone entity, with properties and type is an object.",
+      " a standalone entity, with properties and type is an object.",
       "an array is an value.",
       "a string is an boolean.",
-      "a boolean is an",
+      "a boolean is an array",
     ],
     answer: "a",
   },
@@ -143,7 +108,7 @@ function nextQuestion() {
   var firstBtn1 = document.createElement("buttom");
   firstBtn1.setAttribute("id", "btn1");
   firstBtn1.setAttribute("class", "btn btn-primary qbtn");
-  firstBtn1.innerHTML = questions[questionCounter].choices;
+  firstBtn1.innerHTML = questions[questionCounter].choices[0];
   document.getElementById("myDiv").appendChild(firstBtn1);
   var secondBtn1 = document.createElement("buttom");
   secondBtn1.setAttribute("id", "btn2");
@@ -235,19 +200,21 @@ function nextQuestion2() {
   document.getElementById("myDiv").appendChild(fourthBtn3);
 
   firstBtn3.addEventListener("click", function () {
-    if (Math.floor(value) == 3.3) {
+    value = value + 3.3;
+    console.log(Math.floor(value));
+    if (Math.floor(value) > 3.3 && Math.floor(value) < 6.6) {
       removeElementsByClass("qbtn");
       removeElementsByClass("title");
       question.textContent =
         "You Kinda Passed, score: " + String(Math.floor(value * 10));
       lastPage();
-    } else if (Math.floor(value) == 9.9) {
+    } else if (Math.floor(value) > 6.6 && Math.floor(value) < 9) {
       removeElementsByClass("qbtn");
       removeElementsByClass("title");
       question.textContent =
         "You Passed, score: " + String(Math.floor(value * 10));
       lastPage();
-    } else if (Math.floor(value) == 6.6) {
+    } else if (Math.floor(value) > 6.6 && Math.floor(value) == 9) {
       removeElementsByClass("qbtn");
       removeElementsByClass("title");
       question.textContent =
@@ -262,19 +229,19 @@ function nextQuestion2() {
     }
   });
   secondBtn3.addEventListener("click", function () {
-    if (Math.floor(value) == 3.3) {
+    if (Math.floor(value) > 3.3 && Math.floor(value) < 6.6) {
       removeElementsByClass("qbtn");
       removeElementsByClass("title");
       question.textContent =
         "You Kinda Passed, score: " + String(Math.floor(value * 10));
       lastPage();
-    } else if (Math.floor(value) == 9.9) {
+    } else if (Math.floor(value) > 6.6 && Math.floor(value) < 9) {
       removeElementsByClass("qbtn");
       removeElementsByClass("title");
       question.textContent =
         "You Passed, score: " + String(Math.floor(value * 10));
       lastPage();
-    } else if (Math.floor(value) == 6.6) {
+    } else if (Math.floor(value) > 6.6 && Math.floor(value) == 9) {
       removeElementsByClass("qbtn");
       removeElementsByClass("title");
       question.textContent =
@@ -289,19 +256,19 @@ function nextQuestion2() {
     }
   });
   thirdBtn3.addEventListener("click", function () {
-    if (Math.floor(value) == 3.3) {
+    if (Math.floor(value) > 3.3 && Math.floor(value) < 6.6) {
       removeElementsByClass("qbtn");
       removeElementsByClass("title");
       question.textContent =
         "You Kinda Passed, score: " + String(Math.floor(value * 10));
       lastPage();
-    } else if (Math.floor(value) == 9.9) {
+    } else if (Math.floor(value) > 6.6 && Math.floor(value) < 9) {
       removeElementsByClass("qbtn");
       removeElementsByClass("title");
       question.textContent =
         "You Passed, score: " + String(Math.floor(value * 10));
       lastPage();
-    } else if (Math.floor(value) == 6.6) {
+    } else if (Math.floor(value) > 6.6 && Math.floor(value) == 9) {
       removeElementsByClass("qbtn");
       removeElementsByClass("title");
       question.textContent =
@@ -316,19 +283,19 @@ function nextQuestion2() {
     }
   });
   fourthBtn3.addEventListener("click", function () {
-    if (Math.floor(value) == 3.3) {
+    if (Math.floor(value) > 3.3 && Math.floor(value) < 6.6) {
       removeElementsByClass("qbtn");
       removeElementsByClass("title");
       question.textContent =
         "You Kinda Passed, score: " + String(Math.floor(value * 10));
       lastPage();
-    } else if (Math.floor(value) == 9.9) {
+    } else if (Math.floor(value) > 6.6 && Math.floor(value) < 9) {
       removeElementsByClass("qbtn");
       removeElementsByClass("title");
       question.textContent =
         "You Passed, score: " + String(Math.floor(value * 10));
       lastPage();
-    } else if (Math.floor(value) == 6.6) {
+    } else if (Math.floor(value) > 6.6 && Math.floor(value) == 9) {
       removeElementsByClass("qbtn");
       removeElementsByClass("title");
       question.textContent =
@@ -341,5 +308,42 @@ function nextQuestion2() {
         "You failed, score: " + String(Math.floor(value * 10));
       lastPage();
     }
+  });
+}
+
+function lastPage() {
+  // creating an input element
+  var division1 = document.createElement("div");
+  var input = document.createElement("input");
+  division1.setAttribute("class", "input-group mb-3");
+  input.setAttribute("class", "form-control");
+  var division2 = document.createElement("div");
+  division2.setAttribute("class", "input-group-append");
+  var buttonInput = document.createElement("button");
+  buttonInput.setAttribute("class", "btn btn-primary btn-group-justified");
+  buttonInput.innerHTML = "   Save Score   ";
+  buttonInput.setAttribute("class", "btn btn-outline-secondary");
+  document.getElementById("myDiv").appendChild(division1);
+  document.getElementById("myDiv").appendChild(input);
+  document.getElementById("myDiv").appendChild(division2);
+  document.getElementById("myDiv").appendChild(buttonInput);
+
+  document.getElementById("myDiv").appendChild(division1);
+  //this will change depending on the correct answers
+  var scoreArray = JSON.parse(localStorage.getItem("highscores")) || []; //here you need an array to push all new scores, if the local storage doesn't exist, then just default to an empty array
+
+  var saveScore = document.getElementById("saveScore"); //targets a button with saveScore id
+
+  buttonInput.addEventListener("click", function () {
+    var initials = document.getElementsByClassName("form-control"); //you will create an input element and give it this id of inputEl
+    console.log(initials.value);
+    var data = {
+      initials: initials.value,
+      score: value,
+    };
+    scoreArray.push(data);
+    localStorage.setItem("highscores", JSON.stringify(scoreArray));
+
+    console.log(scoreArray);
   });
 }
