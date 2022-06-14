@@ -27,6 +27,8 @@ startButton.addEventListener("click", initialQuestion);
 
 var questionCounter = 0;
 
+var timer;
+
 var questions = [
   {
     question: "Commonly used data types do not include",
@@ -50,7 +52,10 @@ var questions = [
   },
 ];
 
+var question = document.querySelector(".question");
+
 function initialQuestion() {
+  timer = setInterval(showTime, 1000);
   document.querySelector(".startBtn").remove();
   var question = document.querySelector(".question");
   question.textContent = questions[questionCounter].question;
@@ -91,6 +96,11 @@ function initialQuestion() {
   });
 }
 function nextQuestion() {
+  if (value * 10  == 0){
+    number = number - 5
+  }
+
+
   questionCounter++;
   console.log(questionCounter);
 
@@ -166,6 +176,10 @@ function nextQuestion() {
 }
 
 function nextQuestion2() {
+  if (value * 10 == 3.3){
+    number = number - 5
+  }
+
   questionCounter++;
 
   var question = document.querySelector(".question");
@@ -312,6 +326,10 @@ function nextQuestion2() {
 }
 
 function lastPage() {
+
+  clearInterval(timer)
+
+
   // creating an input element
   var division1 = document.createElement("div");
   var input = document.createElement("input");
@@ -347,3 +365,49 @@ function lastPage() {
     console.log(scoreArray);
   });
 }
+
+
+//  set time == to 60
+
+
+
+var number = 60
+
+document.querySelector(".time").innerHTML = "time: " + number
+
+function showTime() {
+
+if (number <= 0 ) {
+  if (Math.floor(value) > 3.3 && Math.floor(value) < 6.6) {
+    removeElementsByClass("qbtn");
+    removeElementsByClass("title");
+    question.textContent =
+      "You Kinda Passed, score: " + String(Math.floor(value * 10));
+    lastPage();
+  } else if (Math.floor(value) > 6.6 && Math.floor(value) < 9) {
+    removeElementsByClass("qbtn");
+    removeElementsByClass("title");
+    question.textContent =
+      "You Passed, score: " + String(Math.floor(value * 10));
+    lastPage();
+  } else if (Math.floor(value) > 6.6 && Math.floor(value) == 9) {
+    removeElementsByClass("qbtn");
+    removeElementsByClass("title");
+    question.textContent =
+      "You did great , score: " + String(Math.floor(value * 10));
+    lastPage();
+  } else {
+    removeElementsByClass("qbtn");
+    removeElementsByClass("title");
+    question.textContent ="You failed, score: " + String(Math.floor(value * 10));
+    lastPage() 
+  }
+}  else {
+    number --  
+    document.querySelector(".time").innerHTML = "time: " + number
+}
+  
+} 
+
+
+
