@@ -92,14 +92,31 @@ function initialQuestion() {
   document.querySelector("a").addEventListener("click", function () {
     removeElementsByClass("qbtn");
     var question = document.querySelector(".question");
-    question.textContent = "Score: " + String(Math.floor(value * 10));
+    clearInterval(timer);
+
+    array = [];
+    for (i = 0; i < scoreArray.length; i++) {
+      array.push(scoreArray[i].score);
+    }
+    let max = Math.max(...array);
+
+    var str1 = `
+    Current Score:
+      ${String(
+        Math.floor(value * 10)
+      )}\n_\n_ \n_ \n_ \n_ \n_ \n_ \n_ \n_ \n_ \n_ `;
+
+    var str2 = `                    
+       High score:
+      ${Math.floor(max * 10)}\n_\n_ \n_ \n_ \n_ \n_ \n_ \n_ \n_ \n_ \n_ \n_ `;
+
+    question.textContent = str1 + str2;
   });
 }
 function nextQuestion() {
-  if (value * 10  == 0){
-    number = number - 5
+  if (value * 10 == 0) {
+    number = number - 5;
   }
-
 
   questionCounter++;
   console.log(questionCounter);
@@ -176,8 +193,8 @@ function nextQuestion() {
 }
 
 function nextQuestion2() {
-  if (value * 10 == 3.3){
-    number = number - 5
+  if (value * 10 == 3.3) {
+    number = number - 5;
   }
 
   questionCounter++;
@@ -326,9 +343,7 @@ function nextQuestion2() {
 }
 
 function lastPage() {
-
-  clearInterval(timer)
-
+  clearInterval(timer);
 
   // creating an input element
   var division1 = document.createElement("div");
@@ -362,52 +377,55 @@ function lastPage() {
     scoreArray.push(data);
     localStorage.setItem("highscores", JSON.stringify(scoreArray));
 
+    var name = document.querySelector(".form-control").value;
+    document.querySelector(".form-control").remove();
+    document.querySelector(".btn-outline-secondary").remove();
+    document.querySelector(".time").remove();
+    document.querySelector(".question").innerHTML =
+      "Thank you for saving " +
+      name +
+      " your score is " +
+      Math.floor(scoreArray[scoreArray.length - 1].score * 10);
+
     console.log(scoreArray);
   });
 }
 
-
 //  set time == to 60
 
+var number = 60;
 
-
-var number = 60
-
-document.querySelector(".time").innerHTML = "time: " + number
+document.querySelector(".time").innerHTML = "time: " + number;
 
 function showTime() {
-
-if (number <= 0 ) {
-  if (Math.floor(value) > 3.3 && Math.floor(value) < 6.6) {
-    removeElementsByClass("qbtn");
-    removeElementsByClass("title");
-    question.textContent =
-      "You Kinda Passed, score: " + String(Math.floor(value * 10));
-    lastPage();
-  } else if (Math.floor(value) > 6.6 && Math.floor(value) < 9) {
-    removeElementsByClass("qbtn");
-    removeElementsByClass("title");
-    question.textContent =
-      "You Passed, score: " + String(Math.floor(value * 10));
-    lastPage();
-  } else if (Math.floor(value) > 6.6 && Math.floor(value) == 9) {
-    removeElementsByClass("qbtn");
-    removeElementsByClass("title");
-    question.textContent =
-      "You did great , score: " + String(Math.floor(value * 10));
-    lastPage();
+  if (number <= 0) {
+    if (Math.floor(value) > 3.3 && Math.floor(value) < 6.6) {
+      removeElementsByClass("qbtn");
+      removeElementsByClass("title");
+      question.textContent =
+        "You Kinda Passed, score: " + String(Math.floor(value * 10));
+      lastPage();
+    } else if (Math.floor(value) > 6.6 && Math.floor(value) < 9) {
+      removeElementsByClass("qbtn");
+      removeElementsByClass("title");
+      question.textContent =
+        "You Passed, score: " + String(Math.floor(value * 10));
+      lastPage();
+    } else if (Math.floor(value) > 6.6 && Math.floor(value) == 9) {
+      removeElementsByClass("qbtn");
+      removeElementsByClass("title");
+      question.textContent =
+        "You did great , score: " + String(Math.floor(value * 10));
+      lastPage();
+    } else {
+      removeElementsByClass("qbtn");
+      removeElementsByClass("title");
+      question.textContent =
+        "You failed, score: " + String(Math.floor(value * 10));
+      lastPage();
+    }
   } else {
-    removeElementsByClass("qbtn");
-    removeElementsByClass("title");
-    question.textContent ="You failed, score: " + String(Math.floor(value * 10));
-    lastPage() 
+    number--;
+    document.querySelector(".time").innerHTML = "time: " + number;
   }
-}  else {
-    number --  
-    document.querySelector(".time").innerHTML = "time: " + number
 }
-  
-} 
-
-
-
